@@ -23,14 +23,15 @@ jobs:
 
       - name: Build
         run: npm run build
-      
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v2'
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
         with:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v3'
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v3
 
-      - name: 'Build And Push Docker'
-        run: 'gcloud builds submit --tag us-east1-docker.pkg.dev/notely-476220/notely-ar-repo/notely:latest .'
+      - name: Build and Push Docker
+        run: gcloud builds submit --tag us-east1-docker.pkg.dev/notely-476220/notely-ar-repo/notely:latest .
